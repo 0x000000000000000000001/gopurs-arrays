@@ -1,4 +1,4 @@
-# purescript-arrays
+# gopurs-arrays
 
 [![Latest release](http://img.shields.io/github/release/purescript/purescript-arrays.svg)](https://github.com/purescript/purescript-arrays/releases)
 [![Build status](https://github.com/purescript/purescript-arrays/workflows/CI/badge.svg?branch=master)](https://github.com/purescript/purescript-arrays/actions?query=workflow%3ACI+branch%3Amaster)
