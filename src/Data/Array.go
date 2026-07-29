@@ -1,12 +1,12 @@
 
 
-func RangeImpl(start int, end int) []int {
-	step := 1
+func RangeImpl(start int64, end int64) []int64 {
+	step := int64(1)
 	if start > end {
 		step = -1
 	}
 	size := (end - start) * step + 1
-	result := make([]int, size)
+	result := make([]int64, size)
 	i := start
 	n := 0
 	for i != end {
@@ -18,66 +18,66 @@ func RangeImpl(start int, end int) []int {
 	return result
 }
 
-func ReplicateImpl(count int, value interface{}) []interface{} {
+func ReplicateImpl(count int64, value interface{}) []interface{} {
 	if count < 1 {
 		return make([]interface{}, 0)
 	}
 	result := make([]interface{}, count)
-	for i := 0; i < count; i++ {
+	for i := 0; i < int(count); i++ {
 		result[i] = value
 	}
 	return result
 }
 
-func Length(xs []interface{}) int {
-	return len(xs)
+func Length(xs []interface{}) int64 {
+	return int64(len(xs))
 }
 
-func UnconsImpl(empty func(interface{}) interface{}, next func(interface{}) func([]interface{}) interface{}, xs []interface{}) interface{} {
+func UnconsImpl(empty func(interface{}) interface{}, next func(interface{}, []interface{}) interface{}, xs []interface{}) interface{} {
 	if len(xs) == 0 {
 		return empty(nil)
 	}
 	head := xs[0]
 	tail := make([]interface{}, len(xs)-1)
 	copy(tail, xs[1:])
-	return next(head)(tail)
+	return next(head, tail)
 }
 
-func IndexImpl(just func(interface{}) interface{}, nothing interface{}, xs []interface{}, i int) interface{} {
-	if i < 0 || i >= len(xs) {
+func IndexImpl(just func(interface{}) interface{}, nothing interface{}, xs []interface{}, i int64) interface{} {
+	if i < 0 || int(i) >= len(xs) {
 		return nothing
 	}
-	return just(xs[i])
+	return just(xs[int(i)])
 }
 
-func _UpdateAt(just func([]interface{}) interface{}, nothing interface{}, i int, a interface{}, xs []interface{}) interface{} {
-	if i < 0 || i >= len(xs) {
+func _UpdateAt(just func([]interface{}) interface{}, nothing interface{}, i int64, a interface{}, xs []interface{}) interface{} {
+	if i < 0 || int(i) >= len(xs) {
 		return nothing
 	}
 	l1 := make([]interface{}, len(xs))
 	copy(l1, xs)
-	l1[i] = a
+	l1[int(i)] = a
 	return just(l1)
 }
 
-func _InsertAt(just func([]interface{}) interface{}, nothing interface{}, i int, a interface{}, xs []interface{}) interface{} {
-	if i < 0 || i > len(xs) {
+func _InsertAt(just func([]interface{}) interface{}, nothing interface{}, i int64, a interface{}, xs []interface{}) interface{} {
+	if i < 0 || int(i) > len(xs) {
 		return nothing
 	}
 	l1 := make([]interface{}, 0, len(xs)+1)
-	l1 = append(l1, xs[:i]...)
+	l1 = append(l1, xs[:int(i)]...)
 	l1 = append(l1, a)
-	l1 = append(l1, xs[i:]...)
+	l1 = append(l1, xs[int(i):]...)
 	return just(l1)
 }
 
-func _DeleteAt(just func([]interface{}) interface{}, nothing interface{}, i int, xs []interface{}) interface{} {
-	if i < 0 || i >= len(xs) {
+func _DeleteAt(just func([]interface{}) interface{}, nothing interface{}, i int64, xs []interface{}) interface{} {
+	if i < 0 || int(i) >= len(xs) {
 		return nothing
 	}
 	l1 := make([]interface{}, 0, len(xs)-1)
-	l1 = append(l1, xs[:i]...)
-	l1 = append(l1, xs[i+1:]...)
+	l1 = append(l1, xs[:int(i)]...)
+	l1 = append(l1, xs[int(i)+1:]...)
 	return just(l1)
 }
 
@@ -108,39 +108,41 @@ func FilterImpl(f func(interface{}) bool, xs []interface{}) []interface{} {
 	return result
 }
 
-func SliceImpl(s int, e int, l []interface{}) []interface{} {
-	if s < 0 {
-		s = len(l) + s
+func SliceImpl(s int64, e int64, l []interface{}) []interface{} {
+	sInt := int(s)
+	eInt := int(e)
+	if sInt < 0 {
+		sInt = len(l) + sInt
 	}
-	if e < 0 {
-		e = len(l) + e
+	if eInt < 0 {
+		eInt = len(l) + eInt
 	}
-	if s < 0 { s = 0 }
-	if e > len(l) { e = len(l) }
-	if s > e { s = e }
+	if sInt < 0 { sInt = 0 }
+	if eInt > len(l) { eInt = len(l) }
+	if sInt > eInt { sInt = eInt }
 	
-	res := make([]interface{}, e-s)
-	copy(res, l[s:e])
+	res := make([]interface{}, eInt-sInt)
+	copy(res, l[sInt:eInt])
 	return res
 }
 
-func ZipWithImpl(f func(interface{}) func(interface{}) interface{}, xs []interface{}, ys []interface{}) []interface{} {
+func ZipWithImpl(f func(interface{}, interface{}) interface{}, xs []interface{}, ys []interface{}) []interface{} {
 	length := len(xs)
 	if len(ys) < length {
 		length = len(ys)
 	}
 	result := make([]interface{}, length)
 	for i := 0; i < length; i++ {
-		result[i] = f(xs[i])(ys[i])
+		result[i] = f(xs[i], ys[i])
 	}
 	return result
 }
 
-func UnsafeIndexImpl(xs []interface{}, n int) interface{} {
-	return xs[n]
+func UnsafeIndexImpl(xs []interface{}, n int64) interface{} {
+	return xs[int(n)]
 }
 
-func SortByImpl(compare func(interface{}) func(interface{}) interface{}, fromOrdering func(interface{}) int, xs []interface{}) []interface{} {
+func SortByImpl(compare func(interface{}, interface{}) interface{}, fromOrdering func(interface{}) int64, xs []interface{}) []interface{} {
 	if len(xs) < 2 {
 		return xs
 	}
@@ -148,7 +150,7 @@ func SortByImpl(compare func(interface{}) func(interface{}) interface{}, fromOrd
 	copy(out, xs)
 	for i := 0; i < len(out); i++ {
 		for j := i + 1; j < len(out); j++ {
-			c := fromOrdering(compare(out[i])(out[j]))
+			c := fromOrdering(compare(out[i], out[j]))
 			if c > 0 { // GT
 				out[i], out[j] = out[j], out[i]
 			}
@@ -157,21 +159,21 @@ func SortByImpl(compare func(interface{}) func(interface{}) interface{}, fromOrd
 	return out
 }
 
-func ScanrImpl(f func(interface{}) func(interface{}) interface{}, b interface{}, xs []interface{}) []interface{} {
+func ScanrImpl(f func(interface{}, interface{}) interface{}, b interface{}, xs []interface{}) []interface{} {
 	out := make([]interface{}, len(xs))
 	acc := b
 	for i := len(xs) - 1; i >= 0; i-- {
-		acc = f(xs[i])(acc)
+		acc = f(xs[i], acc)
 		out[i] = acc
 	}
 	return out
 }
 
-func ScanlImpl(f func(interface{}) func(interface{}) interface{}, b interface{}, xs []interface{}) []interface{} {
+func ScanlImpl(f func(interface{}, interface{}) interface{}, b interface{}, xs []interface{}) []interface{} {
 	out := make([]interface{}, len(xs))
 	acc := b
 	for i := 0; i < len(xs); i++ {
-		acc = f(acc)(xs[i])
+		acc = f(acc, xs[i])
 		out[i] = acc
 	}
 	return out
@@ -207,19 +209,19 @@ func FindMapImpl(nothing interface{}, isJust func(interface{}) bool, f func(inte
 	return nothing
 }
 
-func FindLastIndexImpl(just func(int) interface{}, nothing interface{}, f func(interface{}) bool, xs []interface{}) interface{} {
+func FindLastIndexImpl(just func(int64) interface{}, nothing interface{}, f func(interface{}) bool, xs []interface{}) interface{} {
 	for i := len(xs) - 1; i >= 0; i-- {
 		if f(xs[i]) {
-			return just(i)
+			return just(int64(i))
 		}
 	}
 	return nothing
 }
 
-func FindIndexImpl(just func(int) interface{}, nothing interface{}, f func(interface{}) bool, xs []interface{}) interface{} {
+func FindIndexImpl(just func(int64) interface{}, nothing interface{}, f func(interface{}) bool, xs []interface{}) interface{} {
 	for i := 0; i < len(xs); i++ {
 		if f(xs[i]) {
-			return just(i)
+			return just(int64(i))
 		}
 	}
 	return nothing

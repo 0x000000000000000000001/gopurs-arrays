@@ -1,67 +1,155 @@
-func New_(_ interface{}) interface{} {
-	panic("Not implemented: new_")
+func New_() func() interface{} {
+	return func() interface{} {
+		arr := make([]interface{}, 0)
+		return &arr
+	}
 }
 
-func PeekImpl(_ interface{}, _ interface{}, _ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: peekImpl")
+func PeekImpl(just func(interface{}) interface{}, nothing interface{}, i int64, arr interface{}) func() interface{} {
+	return func() interface{} {
+		a := arr.(*[]interface{})
+		if i >= 0 && i < int64(len(*a)) {
+			return just((*a)[i])
+		}
+		return nothing
+	}
 }
 
-func PokeImpl(_ interface{}, _ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: pokeImpl")
+func PokeImpl(i int64, a interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		if i >= 0 && i < int64(len(*ptr)) {
+			(*ptr)[i] = a
+			return true
+		}
+		return false
+	}
 }
 
-func LengthImpl(_ interface{}) interface{} {
-	panic("Not implemented: lengthImpl")
+func LengthImpl(arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		return int64(len(*ptr))
+	}
 }
 
-func PopImpl(_ interface{}, _ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: popImpl")
+func PopImpl(just func(interface{}) interface{}, nothing interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		if len(*ptr) > 0 {
+			last := (*ptr)[len(*ptr)-1]
+			*ptr = (*ptr)[:len(*ptr)-1]
+			return just(last)
+		}
+		return nothing
+	}
 }
 
-func PushAllImpl(_ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: pushAllImpl")
+func PushAllImpl(xs []interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		*ptr = append(*ptr, xs...)
+		return int64(len(*ptr))
+	}
 }
 
-func ShiftImpl(_ interface{}, _ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: shiftImpl")
+func PushImpl(x interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		*ptr = append(*ptr, x)
+		return int64(len(*ptr))
+	}
 }
 
-func UnshiftAllImpl(_ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: unshiftAllImpl")
+func ShiftImpl(just func(interface{}) interface{}, nothing interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		if len(*ptr) > 0 {
+			first := (*ptr)[0]
+			*ptr = (*ptr)[1:]
+			return just(first)
+		}
+		return nothing
+	}
 }
 
-func SpliceImpl(_ interface{}, _ interface{}, _ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: spliceImpl")
+func UnshiftAllImpl(xs []interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		*ptr = append(xs, *ptr...)
+		return int64(len(*ptr))
+	}
 }
 
-func UnsafeFreezeImpl(_ interface{}) interface{} {
-	panic("Not implemented: unsafeFreezeImpl")
+func UnshiftImpl(x interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		*ptr = append([]interface{}{x}, *ptr...)
+		return int64(len(*ptr))
+	}
 }
 
-func UnsafeThawImpl(_ interface{}) interface{} {
-	panic("Not implemented: unsafeThawImpl")
+func SpliceImpl(start int64, count int64, xs []interface{}, arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		removed := make([]interface{}, count)
+		copy(removed, (*ptr)[start:start+count])
+		
+		newArr := make([]interface{}, 0, len(*ptr) - int(count) + len(xs))
+		newArr = append(newArr, (*ptr)[:start]...)
+		newArr = append(newArr, xs...)
+		newArr = append(newArr, (*ptr)[start+count:]...)
+		*ptr = newArr
+		return removed
+	}
 }
 
-func FreezeImpl(_ interface{}) interface{} {
-	panic("Not implemented: freezeImpl")
+func UnsafeFreezeImpl(arr interface{}) func() interface{} {
+	return func() interface{} {
+		return *(arr.(*[]interface{}))
+	}
 }
 
-func ThawImpl(_ interface{}) interface{} {
-	panic("Not implemented: thawImpl")
+func UnsafeThawImpl(xs []interface{}) func() interface{} {
+	return func() interface{} {
+		return &xs
+	}
 }
 
-func CloneImpl(_ interface{}) interface{} {
-	panic("Not implemented: cloneImpl")
+func FreezeImpl(arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		res := make([]interface{}, len(*ptr))
+		copy(res, *ptr)
+		return res
+	}
 }
 
-func SortByImpl(_ interface{}, _ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: sortByImpl")
+func ThawImpl(xs []interface{}) func() interface{} {
+	return func() interface{} {
+		res := make([]interface{}, len(xs))
+		copy(res, xs)
+		return &res
+	}
 }
 
-func ToAssocArrayImpl(_ interface{}) interface{} {
-	panic("Not implemented: toAssocArrayImpl")
+func CloneImpl(arr interface{}) func() interface{} {
+	return func() interface{} {
+		ptr := arr.(*[]interface{})
+		res := make([]interface{}, len(*ptr))
+		copy(res, *ptr)
+		return &res
+	}
 }
 
-func PushImpl(_ interface{}, _ interface{}) interface{} {
-	panic("Not implemented: pushImpl")
+func SortByImpl(f func(interface{}, interface{}) interface{}, toInt func(interface{}) int64, arr interface{}) func() interface{} {
+	return func() interface{} {
+		panic("Not implemented: sortByImpl")
+	}
+}
+
+func ToAssocArrayImpl(arr interface{}) func() interface{} {
+	return func() interface{} {
+		panic("Not implemented: toAssocArrayImpl")
+	}
 }
