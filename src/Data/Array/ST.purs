@@ -85,7 +85,10 @@ unsafeThaw = runSTFn1 unsafeThawImpl
 foreign import unsafeThawImpl :: forall h a. STFn1 (Array a) h (STArray h a)
 
 -- | Create a new, empty mutable array.
-foreign import new :: forall h a. ST h (STArray h a)
+foreign import newImpl :: forall h a. ST h (STArray h a)
+
+new :: forall h a. ST h (STArray h a)
+new = newImpl
 
 thaw
   :: forall h a
