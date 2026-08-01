@@ -1,7 +1,7 @@
 function newSTArray() {
   return [];
 }
-export { newSTArray as new };
+export { newSTArray as newImpl };
 
 export const peekImpl = function (just, nothing, i, xs) {
   return i >= 0 && i < xs.length ? just(xs[i]) : nothing;
