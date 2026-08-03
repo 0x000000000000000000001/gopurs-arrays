@@ -195,8 +195,46 @@ func PartitionImpl(f func(interface{}) bool, xs []interface{}) map[string]interf
 	}
 }
 
-func FromFoldableImpl(foldr interface{}, xsVal interface{}) []interface{} {
-	panic("Not implemented: FromFoldableImpl (complex callback)")
+type consList struct {
+	head interface{}
+	tail interface{}
+}
+
+func FromFoldableImpl(foldr func(func(interface{}) func(interface{}) interface{}, interface{}, interface{}) interface{}, xsVal interface{}) []interface{} {
+	var emptyList interface{} = nil
+
+	curryCons := func(head interface{}) func(interface{}) interface{} {
+		return func(tail interface{}) interface{} {
+			return &consList{head: head, tail: tail}
+		}
+	}
+
+	list := foldr(curryCons, emptyList, xsVal)
+
+	var unboxAny func(interface{}) interface{}
+	unboxAny = func(v interface{}) interface{} {
+		if val, ok := v.(gopurs_runtime.Value); ok && val.Type == gopurs_runtime.TypeAny {
+			if val.UnsafePtr != nil {
+				return unboxAny(*(*any)(val.UnsafePtr))
+			}
+			return nil
+		}
+		return v
+	}
+
+	list = unboxAny(list)
+
+	var result []interface{}
+	curr, ok := list.(*consList)
+	for ok && curr != nil {
+		result = append(result, curr.head)
+		curr, ok = unboxAny(curr.tail).(*consList)
+	}
+	
+	if result == nil {
+		return make([]interface{}, 0)
+	}
+	return result
 }
 
 func FindMapImpl(nothing interface{}, isJust func(interface{}) bool, f func(interface{}) interface{}, xs []interface{}) interface{} {
