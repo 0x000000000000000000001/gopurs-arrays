@@ -1027,14 +1027,7 @@ span p arr =
     Nothing ->
       { init: arr, rest: [] }
   where
-  breakIndex = go 0
-  go i =
-    -- This looks like a good opportunity to use the Monad Maybe instance,
-    -- but it's important to write out an explicit case expression here in
-    -- order to ensure that TCO is triggered.
-    case index arr i of
-      Just x -> if p x then go (i + 1) else Just i
-      Nothing -> Nothing
+  breakIndex = findIndex (\x -> not (p x)) arr
 
 -- | Group equal, consecutive elements of an array into arrays.
 -- |

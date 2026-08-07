@@ -1,5 +1,7 @@
 package Data_Array_ST
 
+import "sort"
+
 func NewImpl(s interface{}) *[]interface{} {
 	arr := make([]interface{}, 0)
 	return &arr
@@ -97,9 +99,20 @@ func CloneImpl(arr *[]interface{}) *[]interface{} {
 }
 
 func SortByImpl(f func(interface{}, interface{}) interface{}, toInt func(interface{}) int64, arr *[]interface{}) interface{} {
-	panic("Not implemented: sortByImpl")
+	sort.SliceStable(*arr, func(i, j int) bool {
+		ord := f((*arr)[i], (*arr)[j])
+		return toInt(ord) < 0
+	})
+	return arr
 }
 
 func ToAssocArrayImpl(arr *[]interface{}) interface{} {
-	panic("Not implemented: toAssocArrayImpl")
+	res := make([]interface{}, len(*arr))
+	for i, v := range *arr {
+		res[i] = map[string]interface{}{
+			"value": v,
+			"index": int64(i),
+		}
+	}
+	return res
 }
