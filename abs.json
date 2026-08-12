@@ -1,0 +1,956 @@
+{
+  "annotation": {
+    "meta": {
+      "metaType": "IsNewtype"
+    },
+    "sourceSpan": {
+      "end": [
+        104,
+        29
+      ],
+      "start": [
+        102,
+        1
+      ]
+    },
+    "type": {
+      "body": {
+        "args": [
+          {
+            "row": {
+              "fields": [
+                {
+                  "label": "traverse",
+                  "type": {
+                    "body": {
+                      "body": {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "name": "a",
+                                "type": "TypeVar"
+                              }
+                            ],
+                            "ret": {
+                              "args": [
+                                {
+                                  "name": "b",
+                                  "type": "TypeVar"
+                                }
+                              ],
+                              "constructor": {
+                                "name": "m",
+                                "type": "TypeVar"
+                              },
+                              "type": "TypeApp"
+                            },
+                            "type": "Func"
+                          },
+                          {
+                            "args": [
+                              {
+                                "name": "a",
+                                "type": "TypeVar"
+                              }
+                            ],
+                            "constructor": {
+                              "name": "t",
+                              "type": "TypeVar"
+                            },
+                            "type": "TypeApp"
+                          }
+                        ],
+                        "ret": {
+                          "args": [
+                            {
+                              "args": [
+                                {
+                                  "name": "b",
+                                  "type": "TypeVar"
+                                }
+                              ],
+                              "constructor": {
+                                "name": "t",
+                                "type": "TypeVar"
+                              },
+                              "type": "TypeApp"
+                            }
+                          ],
+                          "constructor": {
+                            "name": "m",
+                            "type": "TypeVar"
+                          },
+                          "type": "TypeApp"
+                        },
+                        "type": "Func"
+                      },
+                      "constraints": [
+                        {
+                          "args": [
+                            {
+                              "name": "m",
+                              "type": "TypeVar"
+                            }
+                          ],
+                          "fqn": [
+                            "Control",
+                            "Applicative",
+                            "Applicative"
+                          ]
+                        }
+                      ],
+                      "type": "ConstrainedType"
+                    },
+                    "type": "ForAll",
+                    "vars": [
+                      "a",
+                      "b",
+                      "m"
+                    ]
+                  }
+                },
+                {
+                  "label": "sequence",
+                  "type": {
+                    "body": {
+                      "body": {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "args": [
+                                  {
+                                    "name": "a",
+                                    "type": "TypeVar"
+                                  }
+                                ],
+                                "constructor": {
+                                  "name": "m",
+                                  "type": "TypeVar"
+                                },
+                                "type": "TypeApp"
+                              }
+                            ],
+                            "constructor": {
+                              "name": "t",
+                              "type": "TypeVar"
+                            },
+                            "type": "TypeApp"
+                          }
+                        ],
+                        "ret": {
+                          "args": [
+                            {
+                              "args": [
+                                {
+                                  "name": "a",
+                                  "type": "TypeVar"
+                                }
+                              ],
+                              "constructor": {
+                                "name": "t",
+                                "type": "TypeVar"
+                              },
+                              "type": "TypeApp"
+                            }
+                          ],
+                          "constructor": {
+                            "name": "m",
+                            "type": "TypeVar"
+                          },
+                          "type": "TypeApp"
+                        },
+                        "type": "Func"
+                      },
+                      "constraints": [
+                        {
+                          "args": [
+                            {
+                              "name": "m",
+                              "type": "TypeVar"
+                            }
+                          ],
+                          "fqn": [
+                            "Control",
+                            "Applicative",
+                            "Applicative"
+                          ]
+                        }
+                      ],
+                      "type": "ConstrainedType"
+                    },
+                    "type": "ForAll",
+                    "vars": [
+                      "a",
+                      "m"
+                    ]
+                  }
+                },
+                {
+                  "label": "Functor0",
+                  "type": {
+                    "args": [
+                      {
+                        "row": {
+                          "fields": [],
+                          "tail": {
+                            "type": "Any"
+                          },
+                          "type": "Row"
+                        },
+                        "type": "Record"
+                      }
+                    ],
+                    "ret": {
+                      "row": {
+                        "fields": [
+                          {
+                            "label": "map",
+                            "type": {
+                              "body": {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "ret": {
+                                      "name": "b",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "Func"
+                                  },
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "constructor": {
+                                      "name": "t",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "TypeApp"
+                                  }
+                                ],
+                                "ret": {
+                                  "args": [
+                                    {
+                                      "name": "b",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "constructor": {
+                                    "name": "t",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "TypeApp"
+                                },
+                                "type": "Func"
+                              },
+                              "type": "ForAll",
+                              "vars": [
+                                "a",
+                                "b"
+                              ]
+                            }
+                          }
+                        ],
+                        "tail": {
+                          "type": "Any"
+                        },
+                        "type": "Row"
+                      },
+                      "type": "Record"
+                    },
+                    "type": "Func"
+                  }
+                },
+                {
+                  "label": "Foldable1",
+                  "type": {
+                    "args": [
+                      {
+                        "row": {
+                          "fields": [],
+                          "tail": {
+                            "type": "Any"
+                          },
+                          "type": "Row"
+                        },
+                        "type": "Record"
+                      }
+                    ],
+                    "ret": {
+                      "row": {
+                        "fields": [
+                          {
+                            "label": "foldr",
+                            "type": {
+                              "body": {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      },
+                                      {
+                                        "name": "b",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "ret": {
+                                      "name": "b",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "Func"
+                                  },
+                                  {
+                                    "name": "b",
+                                    "type": "TypeVar"
+                                  },
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "constructor": {
+                                      "name": "t",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "TypeApp"
+                                  }
+                                ],
+                                "ret": {
+                                  "name": "b",
+                                  "type": "TypeVar"
+                                },
+                                "type": "Func"
+                              },
+                              "type": "ForAll",
+                              "vars": [
+                                "a",
+                                "b"
+                              ]
+                            }
+                          },
+                          {
+                            "label": "foldl",
+                            "type": {
+                              "body": {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "b",
+                                        "type": "TypeVar"
+                                      },
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "ret": {
+                                      "name": "b",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "Func"
+                                  },
+                                  {
+                                    "name": "b",
+                                    "type": "TypeVar"
+                                  },
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "constructor": {
+                                      "name": "t",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "TypeApp"
+                                  }
+                                ],
+                                "ret": {
+                                  "name": "b",
+                                  "type": "TypeVar"
+                                },
+                                "type": "Func"
+                              },
+                              "type": "ForAll",
+                              "vars": [
+                                "a",
+                                "b"
+                              ]
+                            }
+                          },
+                          {
+                            "label": "foldMap",
+                            "type": {
+                              "body": {
+                                "body": {
+                                  "args": [
+                                    {
+                                      "args": [
+                                        {
+                                          "name": "a",
+                                          "type": "TypeVar"
+                                        }
+                                      ],
+                                      "ret": {
+                                        "name": "m",
+                                        "type": "TypeVar"
+                                      },
+                                      "type": "Func"
+                                    },
+                                    {
+                                      "args": [
+                                        {
+                                          "name": "a",
+                                          "type": "TypeVar"
+                                        }
+                                      ],
+                                      "constructor": {
+                                        "name": "t",
+                                        "type": "TypeVar"
+                                      },
+                                      "type": "TypeApp"
+                                    }
+                                  ],
+                                  "ret": {
+                                    "name": "m",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "Func"
+                                },
+                                "constraints": [
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "m",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "fqn": [
+                                      "Data",
+                                      "Monoid",
+                                      "Monoid"
+                                    ]
+                                  }
+                                ],
+                                "type": "ConstrainedType"
+                              },
+                              "type": "ForAll",
+                              "vars": [
+                                "a",
+                                "m"
+                              ]
+                            }
+                          }
+                        ],
+                        "tail": {
+                          "type": "Any"
+                        },
+                        "type": "Row"
+                      },
+                      "type": "Record"
+                    },
+                    "type": "Func"
+                  }
+                }
+              ],
+              "tail": {
+                "type": "Any"
+              },
+              "type": "Row"
+            },
+            "type": "Record"
+          }
+        ],
+        "ret": {
+          "row": {
+            "fields": [
+              {
+                "label": "traverse",
+                "type": {
+                  "body": {
+                    "body": {
+                      "args": [
+                        {
+                          "args": [
+                            {
+                              "name": "a",
+                              "type": "TypeVar"
+                            }
+                          ],
+                          "ret": {
+                            "args": [
+                              {
+                                "name": "b",
+                                "type": "TypeVar"
+                              }
+                            ],
+                            "constructor": {
+                              "name": "m",
+                              "type": "TypeVar"
+                            },
+                            "type": "TypeApp"
+                          },
+                          "type": "Func"
+                        },
+                        {
+                          "args": [
+                            {
+                              "name": "a",
+                              "type": "TypeVar"
+                            }
+                          ],
+                          "constructor": {
+                            "name": "t",
+                            "type": "TypeVar"
+                          },
+                          "type": "TypeApp"
+                        }
+                      ],
+                      "ret": {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "name": "b",
+                                "type": "TypeVar"
+                              }
+                            ],
+                            "constructor": {
+                              "name": "t",
+                              "type": "TypeVar"
+                            },
+                            "type": "TypeApp"
+                          }
+                        ],
+                        "constructor": {
+                          "name": "m",
+                          "type": "TypeVar"
+                        },
+                        "type": "TypeApp"
+                      },
+                      "type": "Func"
+                    },
+                    "constraints": [
+                      {
+                        "args": [
+                          {
+                            "name": "m",
+                            "type": "TypeVar"
+                          }
+                        ],
+                        "fqn": [
+                          "Control",
+                          "Applicative",
+                          "Applicative"
+                        ]
+                      }
+                    ],
+                    "type": "ConstrainedType"
+                  },
+                  "type": "ForAll",
+                  "vars": [
+                    "a",
+                    "b",
+                    "m"
+                  ]
+                }
+              },
+              {
+                "label": "sequence",
+                "type": {
+                  "body": {
+                    "body": {
+                      "args": [
+                        {
+                          "args": [
+                            {
+                              "args": [
+                                {
+                                  "name": "a",
+                                  "type": "TypeVar"
+                                }
+                              ],
+                              "constructor": {
+                                "name": "m",
+                                "type": "TypeVar"
+                              },
+                              "type": "TypeApp"
+                            }
+                          ],
+                          "constructor": {
+                            "name": "t",
+                            "type": "TypeVar"
+                          },
+                          "type": "TypeApp"
+                        }
+                      ],
+                      "ret": {
+                        "args": [
+                          {
+                            "args": [
+                              {
+                                "name": "a",
+                                "type": "TypeVar"
+                              }
+                            ],
+                            "constructor": {
+                              "name": "t",
+                              "type": "TypeVar"
+                            },
+                            "type": "TypeApp"
+                          }
+                        ],
+                        "constructor": {
+                          "name": "m",
+                          "type": "TypeVar"
+                        },
+                        "type": "TypeApp"
+                      },
+                      "type": "Func"
+                    },
+                    "constraints": [
+                      {
+                        "args": [
+                          {
+                            "name": "m",
+                            "type": "TypeVar"
+                          }
+                        ],
+                        "fqn": [
+                          "Control",
+                          "Applicative",
+                          "Applicative"
+                        ]
+                      }
+                    ],
+                    "type": "ConstrainedType"
+                  },
+                  "type": "ForAll",
+                  "vars": [
+                    "a",
+                    "m"
+                  ]
+                }
+              },
+              {
+                "label": "Functor0",
+                "type": {
+                  "args": [
+                    {
+                      "row": {
+                        "fields": [],
+                        "tail": {
+                          "type": "Any"
+                        },
+                        "type": "Row"
+                      },
+                      "type": "Record"
+                    }
+                  ],
+                  "ret": {
+                    "row": {
+                      "fields": [
+                        {
+                          "label": "map",
+                          "type": {
+                            "body": {
+                              "args": [
+                                {
+                                  "args": [
+                                    {
+                                      "name": "a",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "ret": {
+                                    "name": "b",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "Func"
+                                },
+                                {
+                                  "args": [
+                                    {
+                                      "name": "a",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "constructor": {
+                                    "name": "t",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "TypeApp"
+                                }
+                              ],
+                              "ret": {
+                                "args": [
+                                  {
+                                    "name": "b",
+                                    "type": "TypeVar"
+                                  }
+                                ],
+                                "constructor": {
+                                  "name": "t",
+                                  "type": "TypeVar"
+                                },
+                                "type": "TypeApp"
+                              },
+                              "type": "Func"
+                            },
+                            "type": "ForAll",
+                            "vars": [
+                              "a",
+                              "b"
+                            ]
+                          }
+                        }
+                      ],
+                      "tail": {
+                        "type": "Any"
+                      },
+                      "type": "Row"
+                    },
+                    "type": "Record"
+                  },
+                  "type": "Func"
+                }
+              },
+              {
+                "label": "Foldable1",
+                "type": {
+                  "args": [
+                    {
+                      "row": {
+                        "fields": [],
+                        "tail": {
+                          "type": "Any"
+                        },
+                        "type": "Row"
+                      },
+                      "type": "Record"
+                    }
+                  ],
+                  "ret": {
+                    "row": {
+                      "fields": [
+                        {
+                          "label": "foldr",
+                          "type": {
+                            "body": {
+                              "args": [
+                                {
+                                  "args": [
+                                    {
+                                      "name": "a",
+                                      "type": "TypeVar"
+                                    },
+                                    {
+                                      "name": "b",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "ret": {
+                                    "name": "b",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "Func"
+                                },
+                                {
+                                  "name": "b",
+                                  "type": "TypeVar"
+                                },
+                                {
+                                  "args": [
+                                    {
+                                      "name": "a",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "constructor": {
+                                    "name": "t",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "TypeApp"
+                                }
+                              ],
+                              "ret": {
+                                "name": "b",
+                                "type": "TypeVar"
+                              },
+                              "type": "Func"
+                            },
+                            "type": "ForAll",
+                            "vars": [
+                              "a",
+                              "b"
+                            ]
+                          }
+                        },
+                        {
+                          "label": "foldl",
+                          "type": {
+                            "body": {
+                              "args": [
+                                {
+                                  "args": [
+                                    {
+                                      "name": "b",
+                                      "type": "TypeVar"
+                                    },
+                                    {
+                                      "name": "a",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "ret": {
+                                    "name": "b",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "Func"
+                                },
+                                {
+                                  "name": "b",
+                                  "type": "TypeVar"
+                                },
+                                {
+                                  "args": [
+                                    {
+                                      "name": "a",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "constructor": {
+                                    "name": "t",
+                                    "type": "TypeVar"
+                                  },
+                                  "type": "TypeApp"
+                                }
+                              ],
+                              "ret": {
+                                "name": "b",
+                                "type": "TypeVar"
+                              },
+                              "type": "Func"
+                            },
+                            "type": "ForAll",
+                            "vars": [
+                              "a",
+                              "b"
+                            ]
+                          }
+                        },
+                        {
+                          "label": "foldMap",
+                          "type": {
+                            "body": {
+                              "body": {
+                                "args": [
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "ret": {
+                                      "name": "m",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "Func"
+                                  },
+                                  {
+                                    "args": [
+                                      {
+                                        "name": "a",
+                                        "type": "TypeVar"
+                                      }
+                                    ],
+                                    "constructor": {
+                                      "name": "t",
+                                      "type": "TypeVar"
+                                    },
+                                    "type": "TypeApp"
+                                  }
+                                ],
+                                "ret": {
+                                  "name": "m",
+                                  "type": "TypeVar"
+                                },
+                                "type": "Func"
+                              },
+                              "constraints": [
+                                {
+                                  "args": [
+                                    {
+                                      "name": "m",
+                                      "type": "TypeVar"
+                                    }
+                                  ],
+                                  "fqn": [
+                                    "Data",
+                                    "Monoid",
+                                    "Monoid"
+                                  ]
+                                }
+                              ],
+                              "type": "ConstrainedType"
+                            },
+                            "type": "ForAll",
+                            "vars": [
+                              "a",
+                              "m"
+                            ]
+                          }
+                        }
+                      ],
+                      "tail": {
+                        "type": "Any"
+                      },
+                      "type": "Row"
+                    },
+                    "type": "Record"
+                  },
+                  "type": "Func"
+                }
+              }
+            ],
+            "tail": {
+              "type": "Any"
+            },
+            "type": "Row"
+          },
+          "type": "Record"
+        },
+        "type": "Func"
+      },
+      "type": "ForAll",
+      "vars": [
+        "t"
+      ]
+    }
+  },
+  "type": "Var",
+  "value": {
+    "identifier": "Traversable$Dict",
+    "moduleName": [
+      "Data",
+      "Traversable"
+    ]
+  }
+}
