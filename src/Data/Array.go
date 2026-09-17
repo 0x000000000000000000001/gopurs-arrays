@@ -1,4 +1,4 @@
-
+import "sort"
 
 func RangeImpl(start int64, end int64) []int64 {
 	step := int64(1)
@@ -148,14 +148,9 @@ func SortByImpl(compare func(interface{}, interface{}) interface{}, fromOrdering
 	}
 	out := make([]interface{}, len(xs))
 	copy(out, xs)
-	for i := 0; i < len(out); i++ {
-		for j := i + 1; j < len(out); j++ {
-			c := fromOrdering(compare(out[i], out[j]))
-			if c > 0 { // GT
-				out[i], out[j] = out[j], out[i]
-			}
-		}
-	}
+	sort.SliceStable(out, func(i, j int) bool {
+		return fromOrdering(compare(out[i], out[j])) < 0
+	})
 	return out
 }
 
