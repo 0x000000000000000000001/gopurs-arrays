@@ -260,7 +260,7 @@ func FindIndexImpl(just func(int64) interface{}, nothing interface{}, f func(int
 	return nothing
 }
 
-func AnyImpl(p func(interface{}) bool, xs []interface{}) bool {
+func AnyImpl[A any](p func(A) bool, xs []A) bool {
 	for _, x := range xs {
 		if p(x) {
 			return true
