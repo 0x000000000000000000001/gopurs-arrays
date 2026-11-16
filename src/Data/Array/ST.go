@@ -98,10 +98,22 @@ func CloneImpl(arr *[]interface{}) *[]interface{} {
 	return &res
 }
 
+// stSortSlice avoids sort.SliceStable's reflection-based swaps.
+type stSortSlice struct {
+	xs   []interface{}
+	less func(a, b interface{}) bool
+}
+
+func (s stSortSlice) Len() int           { return len(s.xs) }
+func (s stSortSlice) Less(i, j int) bool { return s.less(s.xs[i], s.xs[j]) }
+func (s stSortSlice) Swap(i, j int)      { s.xs[i], s.xs[j] = s.xs[j], s.xs[i] }
+
 func SortByImpl(f func(interface{}, interface{}) interface{}, toInt func(interface{}) int64, arr *[]interface{}) interface{} {
-	sort.SliceStable(*arr, func(i, j int) bool {
-		ord := f((*arr)[i], (*arr)[j])
-		return toInt(ord) < 0
+	sort.Stable(stSortSlice{
+		xs: *arr,
+		less: func(a, b interface{}) bool {
+			return toInt(f(a, b)) < 0
+		},
 	})
 	return arr
 }

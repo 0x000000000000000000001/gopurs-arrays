@@ -1,4 +1,7 @@
-import "sort"
+import (
+	r "gopurs/output/gopurs_runtime"
+	"sort"
+)
 
 func RangeImpl(start int64, end int64) []int64 {
 	step := int64(1)
@@ -90,20 +93,30 @@ func Reverse(xs []interface{}) []interface{} {
 	return l1
 }
 
-func Concat(xss [][]interface{}) []interface{} {
-	var result []interface{}
-	for _, xs := range xss {
-		result = append(result, xs...)
+func Concat(xss []r.Value) []r.Value {
+	total := 0
+	for _, v := range xss {
+		total += len(r.Unbox[[]r.Value](v))
+	}
+	if total == 0 {
+		return nil
+	}
+	result := make([]r.Value, 0, total)
+	for _, v := range xss {
+		result = append(result, r.Unbox[[]r.Value](v)...)
 	}
 	return result
 }
 
-func FilterImpl(f func(interface{}) bool, xs []interface{}) []interface{} {
-	var result []interface{}
+func FilterImpl(f func(r.Value) r.Value, xs []r.Value) []r.Value {
+	result := make([]r.Value, 0, len(xs))
 	for _, x := range xs {
-		if f(x) {
+		if r.Unbox[bool](f(x)) {
 			result = append(result, x)
 		}
+	}
+	if len(result) == 0 {
+		return nil
 	}
 	return result
 }
@@ -138,18 +151,32 @@ func ZipWithImpl(f func(interface{}, interface{}) interface{}, xs []interface{},
 	return result
 }
 
-func UnsafeIndexImpl(xs []interface{}, n int64) interface{} {
+func UnsafeIndexImpl(xs []r.Value, n int64) r.Value {
 	return xs[int(n)]
 }
 
-func SortByImpl(compare func(interface{}, interface{}) interface{}, fromOrdering func(interface{}) int64, xs []interface{}) []interface{} {
+// arraySortSlice lets sort.Stable move elements through direct swaps instead
+// of sort.SliceStable's reflect-based Swapper.
+type arraySortSlice struct {
+	xs   []r.Value
+	less func(a, b r.Value) bool
+}
+
+func (s arraySortSlice) Len() int           { return len(s.xs) }
+func (s arraySortSlice) Less(i, j int) bool { return s.less(s.xs[i], s.xs[j]) }
+func (s arraySortSlice) Swap(i, j int)      { s.xs[i], s.xs[j] = s.xs[j], s.xs[i] }
+
+func SortByImpl(compare func(r.Value, r.Value) r.Value, fromOrdering func(r.Value) int64, xs []r.Value) []r.Value {
 	if len(xs) < 2 {
 		return xs
 	}
-	out := make([]interface{}, len(xs))
+	out := make([]r.Value, len(xs))
 	copy(out, xs)
-	sort.SliceStable(out, func(i, j int) bool {
-		return fromOrdering(compare(out[i], out[j])) < 0
+	sort.Stable(arraySortSlice{
+		xs: out,
+		less: func(a, b r.Value) bool {
+			return fromOrdering(compare(a, b)) < 0
+		},
 	})
 	return out
 }
